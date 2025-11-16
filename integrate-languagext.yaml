@@ -1,0 +1,32 @@
+$schema: ./prompt-spec.schema.yaml
+SchemaVersion: 1
+PromptVersion: 1
+author: vertical virals
+parameters: none
+examples:
+  - The classes are demo for the template. These have minimal logi. The integration will be minimal if any. This is also a good first test of your capabilities in a complex scenario.
+tags:
+  - LanguageExt integration
+  - Clean architecture
+metadata: Integrates LanguageExt into a Clean Architecture solution
+prerequisites:
+  - Ensure .NET SDK is installed and available in PATH.
+  - Run from the root directory where you want the library integrated.
+  - Read the files in the specifications folder. 
+    Start with the constitution.md file. 
+    Then, read the rest in the order they are referred in the constitution.
+post-conditions:
+  - It should build successfully with LanguageExt integrated.
+  - The package LanguageExt.Core should be added to the solution and all the projects.
+name: LanguageExt INTEGRATION
+description: >
+    This prompt integrates LanguageExt into a Clean Architecture template package
+considerations: There is already backup offline and a breakpoint in Git to return in case of need, break away!
+steps:
+  - Add the LanguageExt package to the solution. Use the 4.4.9 version or later, in Nuget. The solution uses Central Package Management, so add the package reference to the Directory.Packages.props file in the solution root. The solution uses .Net 10 tls and the package supported and works well.
+  - Add the LanguageExt package to UseCases project.
+  - Parse the code in ALL the classes in the UseCases project to identify opportunities to leverage LanguageExt features.
+  - Replace the code with LanguageExt constructs where applicable.
+  - Prefer Fin<T> over Either<L, R> for error handling and Option<T> for optional values.
+  - Ensure that the solution builds successfully after the integration.
+
