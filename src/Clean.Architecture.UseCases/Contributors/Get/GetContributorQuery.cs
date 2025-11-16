@@ -2,4 +2,4 @@
 
 namespace Clean.Architecture.UseCases.Contributors.Get;
 
-public record GetContributorQuery(ContributorId ContributorId) : IQuery<Result<ContributorDto>>;
+public record GetContributorQuery(ContributorId ContributorId) : IQuery<Fin<Option<ContributorDto>>>;

@@ -13,6 +13,7 @@
     <File Path="constitution.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
+    <File Path="docs/architecture-decisions/README.md" />
     <File Path="integrate-languagext.yaml" />
     <File Path="naming-conventions.md" />
     <File Path="performance.md" />
@@ -33,9 +34,7 @@
     <Project Path="src/Clean.Architecture.ServiceDefaults/Clean.Architecture.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Clean.Architecture.FunctionalTests/Clean.Architecture.FunctionalTests.csproj">
-      <BuildDependency Project="src/Clean.Architecture.Web/Clean.Architecture.Web.csproj" />
-    </Project>
+    <Project Path="tests/Clean.Architecture.FunctionalTests/Clean.Architecture.FunctionalTests.csproj" />
     <Project Path="tests/Clean.Architecture.IntegrationTests/Clean.Architecture.IntegrationTests.csproj">
       <BuildDependency Project="src/Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj" />
     </Project>

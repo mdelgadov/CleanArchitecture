@@ -17,6 +17,7 @@
     <PackageReference Include="NimblePros.Metronome" />
 
     <PackageReference Include="Vogen" />
+    <PackageReference Include="LanguageExt.Core" />
   </ItemGroup>
 
   <ItemGroup>

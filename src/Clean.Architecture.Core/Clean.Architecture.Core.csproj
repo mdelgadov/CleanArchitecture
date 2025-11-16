@@ -13,6 +13,7 @@
     <PackageReference Include="Mediator.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Vogen" />
+    <PackageReference Include="LanguageExt.Core" />
   </ItemGroup>
 
 </Project>

@@ -1,17 +1,12 @@
 ﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.Get;
+using Clean.Architecture.UseCases.Contributors; // for ContributorDto
 using Clean.Architecture.UseCases.Contributors.Update;
-using Clean.Architecture.Web.Extensions;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Clean.Architecture.Web.Contributors;
 
 public class Update(IMediator mediator)
-  : Endpoint<
-        UpdateContributorRequest,
-        Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>,
-        UpdateContributorMapper>
+  : Endpoint<UpdateContributorRequest, Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>, UpdateContributorMapper>
 {
   private readonly IMediator _mediator = mediator;
 
@@ -24,14 +19,14 @@ public class Update(IMediator mediator)
     Summary(s =>
     {
       s.Summary = "Update a contributor";
-      s.Description = "Updates an existing contributor's information. The contributor name must be between 2 and 100 characters long.";
+      s.Description = "Updates an existing contributor's information.";
       s.ExampleRequest = new UpdateContributorRequest { Id = 1, Name = "Updated Name" };
       s.ResponseExamples[200] = new UpdateContributorResponse(new ContributorRecord(1, "Updated Name", ""));
 
       // Document possible responses
       s.Responses[200] = "Contributor updated successfully";
       s.Responses[404] = "Contributor with specified ID not found";
-      s.Responses[400] = "Invalid input data or business rule violation";
+      s.Responses[400] = "Invalid input data";
     });
 
     // Add tags for API grouping
@@ -45,22 +40,22 @@ public class Update(IMediator mediator)
       .ProducesProblem(400));
   }
 
-  public override async Task<Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>>
-    ExecuteAsync(UpdateContributorRequest request, CancellationToken ct)
+  public override async Task<Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>> ExecuteAsync(UpdateContributorRequest request, CancellationToken ct)
   {
-    var cmd = new UpdateContributorCommand(
-      ContributorId.From(request.Id),
-      ContributorName.From(request.Name!));
+    var cmd = new UpdateContributorCommand(ContributorId.From(request.Id), ContributorName.From(request.Name!));
+    var fin = await _mediator.Send(cmd, ct);
 
-    var result = await _mediator.Send(cmd, ct);
+    if (fin.IsFail)
+      return TypedResults.Problem(title: "Update failed", detail: fin.ToString(), statusCode: StatusCodes.Status400BadRequest);
 
-    return result.ToUpdateResult(Map.FromEntity);
+    var opt = fin.Match(o => o, _ => Option<ContributorDto>.None);
+    return opt.Match<Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>>(
+      v => TypedResults.Ok(Map.FromEntity(v)),
+      () => TypedResults.NotFound());
   }
 }
 
-public sealed class UpdateContributorMapper
-  : Mapper<UpdateContributorRequest, UpdateContributorResponse, ContributorDto>
+public sealed class UpdateContributorMapper : Mapper<UpdateContributorRequest, UpdateContributorResponse, ContributorDto>
 {
-  public override UpdateContributorResponse FromEntity(ContributorDto e)
-    => new(new ContributorRecord(e.Id.Value, e.Name.Value, ""));
+  public override UpdateContributorResponse FromEntity(ContributorDto e) => new(new ContributorRecord(e.Id.Value, e.Name.Value, ""));
 }

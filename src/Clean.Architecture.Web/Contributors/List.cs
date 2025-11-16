@@ -13,11 +13,10 @@ public class List(IMediator mediator) : Endpoint<ListContributorsRequest, Contri
   {
     Get("/Contributors");
     AllowAnonymous();
-
     Summary(s =>
     {
       s.Summary = "List contributors with pagination";
-      s.Description = "Retrieves a paginated list of all contributors. Supports GitHub-style pagination with 1-based page indexing and configurable page size.";
+      s.Description = "Retrieves a paginated list of all contributors.";
       s.ExampleRequest = new ListContributorsRequest { Page = 1, PerPage = 10 };
       s.ResponseExamples[200] = new ContributorListResponse(
         new List<ContributorRecord>
@@ -26,20 +25,12 @@ public class List(IMediator mediator) : Endpoint<ListContributorsRequest, Contri
           new(2, "Jane Smith", PhoneNumber.Unknown.ToString())
         },
         1, 10, 2, 1);
-
-      // Document pagination parameters
       s.Params["page"] = "1-based page index (default 1)";
       s.Params["per_page"] = $"Page size 1–{UseCases.Constants.MAX_PAGE_SIZE} (default {UseCases.Constants.DEFAULT_PAGE_SIZE})";
-
-      // Document possible responses
-      s.Responses[200] = "Paginated list of contributors returned successfully";
+      s.Responses[200] = "Paginated list of contributors";
       s.Responses[400] = "Invalid pagination parameters";
     });
-
-    // Add tags for API grouping
     Tags("Contributors");
-
-    // Add additional metadata
     Description(builder => builder
       .Accepts<ListContributorsRequest>()
       .Produces<ContributorListResponse>(200, "application/json")
@@ -48,17 +39,18 @@ public class List(IMediator mediator) : Endpoint<ListContributorsRequest, Contri
 
   public override async Task HandleAsync(ListContributorsRequest request, CancellationToken cancellationToken)
   {
-    var result = await _mediator.Send(new ListContributorsQuery(request.Page, request.PerPage));
-    if (!result.IsSuccess)
+    var fin = await _mediator.Send(new ListContributorsQuery(request.Page, request.PerPage));
+
+    if (fin.IsFail)
     {
-      await Send.ErrorsAsync(statusCode: 400, cancellationToken);
+      AddError(fin.ToString());
+      await Send.ErrorsAsync(statusCode: 400, cancellation: cancellationToken);
       return;
     }
 
-    var pagedResult = result.Value;
-    AddLinkHeader(pagedResult.Page, pagedResult.PerPage, pagedResult.TotalPages);
-
-    var response = Map.FromEntity(pagedResult);
+    var paged = fin.Match(p => p, _ => default!); // safe since IsFail checked
+    AddLinkHeader(paged.Page, paged.PerPage, paged.TotalPages);
+    var response = Map.FromEntity(paged);
     await Send.OkAsync(response, cancellationToken);
   }
 
@@ -86,35 +78,22 @@ public class List(IMediator mediator) : Endpoint<ListContributorsRequest, Contri
 
 public sealed class ListContributorsRequest
 {
-  // Bind to ?page=
-  [BindFrom("page")]
-  public int Page { get; init; } = 1;
-
-  // Bind to ?per_page=
-  [BindFrom("per_page")]
-  public int PerPage { get; init; } = UseCases.Constants.DEFAULT_PAGE_SIZE;
+  [BindFrom("page")] public int Page { get; init; } = 1;
+  [BindFrom("per_page")] public int PerPage { get; init; } = UseCases.Constants.DEFAULT_PAGE_SIZE;
 }
 
 public record ContributorListResponse : UseCases.PagedResult<ContributorRecord>
 {
   public ContributorListResponse(IReadOnlyList<ContributorRecord> Items, int Page, int PerPage, int TotalCount, int TotalPages)
-    : base(Items, Page, PerPage, TotalCount, TotalPages)
-  {
-  }
+    : base(Items, Page, PerPage, TotalCount, TotalPages) { }
 }
-
 
 public sealed class ListContributorsValidator : Validator<ListContributorsRequest>
 {
   public ListContributorsValidator()
   {
-    RuleFor(x => x.Page)
-      .GreaterThanOrEqualTo(1)
-      .WithMessage("page must be >= 1");
-
-    RuleFor(x => x.PerPage)
-      .InclusiveBetween(1, UseCases.Constants.MAX_PAGE_SIZE)
-      .WithMessage($"per_page must be between 1 and {UseCases.Constants.MAX_PAGE_SIZE}");
+    RuleFor(x => x.Page).GreaterThanOrEqualTo(1).WithMessage("page must be >= 1");
+    RuleFor(x => x.PerPage).InclusiveBetween(1, UseCases.Constants.MAX_PAGE_SIZE).WithMessage($"per_page must be between 1 and {UseCases.Constants.MAX_PAGE_SIZE}");
   }
 }
 
@@ -123,10 +102,7 @@ public sealed class ListContributorsMapper
 {
   public override ContributorListResponse FromEntity(UseCases.PagedResult<ContributorDto> e)
   {
-    var items = e.Items
-      .Select(c => new ContributorRecord(c.Id.Value, c.Name.Value, c.PhoneNumber.ToString()))
-      .ToList();
-
+    var items = e.Items.Select(c => new ContributorRecord(c.Id.Value, c.Name.Value, c.PhoneNumber.ToString())).ToList();
     return new ContributorListResponse(items, e.Page, e.PerPage, e.TotalCount, e.TotalPages);
   }
 }

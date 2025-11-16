@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Result" />
+    <PackageReference Include="LanguageExt.Core" />
   </ItemGroup>
 
   <ItemGroup>

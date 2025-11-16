@@ -1,22 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors.Create;
-using Clean.Architecture.Web.Extensions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Clean.Architecture.Web.Contributors;
 
-// This shows an example of having all related types in one file for simplicity.
-// Fast-Endpoints generally uses one file per class for larger projects, which
-// is the recommended approach. More files, but fewer merge conflicts and easier to 
-// see what changed in a given commit or PR.
-
 public class Create(IMediator mediator)
-  : Endpoint<CreateContributorRequest,
-          Results<Created<CreateContributorResponse>,
-                          ValidationProblem,
-                          ProblemHttpResult>>
+  : Endpoint<CreateContributorRequest, Results<Created<CreateContributorResponse>, ProblemHttpResult>>
 {
   private readonly IMediator _mediator = mediator;
 
@@ -27,35 +18,25 @@ public class Create(IMediator mediator)
     Summary(s =>
     {
       s.Summary = "Create a new contributor";
-      s.Description = "Creates a new contributor with the provided name. The contributor name must be between 2 and 100 characters long.";
+      s.Description = "Creates a new contributor.";
       s.ExampleRequest = new CreateContributorRequest { Name = "John Doe" };
       s.ResponseExamples[201] = new CreateContributorResponse(1, "John Doe");
-
-      // Document possible responses
       s.Responses[201] = "Contributor created successfully";
-      s.Responses[400] = "Invalid input data - validation errors";
-      s.Responses[500] = "Internal server error";
+      s.Responses[400] = "Invalid input data";
     });
-
-    // Add tags for API grouping
     Tags("Contributors");
-
-    // Add additional metadata
     Description(builder => builder
       .Accepts<CreateContributorRequest>("application/json")
       .Produces<CreateContributorResponse>(201, "application/json")
-      .ProducesProblem(400)
-      .ProducesProblem(500));
+      .ProducesProblem(400));
   }
 
-  public override async Task<Results<Created<CreateContributorResponse>, ValidationProblem, ProblemHttpResult>>
-    ExecuteAsync(CreateContributorRequest request, CancellationToken cancellationToken)
+  public override async Task<Results<Created<CreateContributorResponse>, ProblemHttpResult>> ExecuteAsync(CreateContributorRequest request, CancellationToken cancellationToken)
   {
-    var result = await _mediator.Send(new CreateContributorCommand(ContributorName.From(request.Name!), request.PhoneNumber));
-
-    return result.ToCreatedResult(
-      id => $"/Contributors/{id}",
-      id => new CreateContributorResponse(id.Value, request.Name!));
+    var fin = await _mediator.Send(new CreateContributorCommand(ContributorName.From(request.Name!), request.PhoneNumber));
+    return fin.Match<Results<Created<CreateContributorResponse>, ProblemHttpResult>>(
+      id => TypedResults.Created($"/Contributors/{id}", new CreateContributorResponse(id.Value, request.Name!)),
+      err => TypedResults.Problem(title: "Create failed", detail: err.ToString(), statusCode: StatusCodes.Status400BadRequest));
   }
 }
 
@@ -64,7 +45,7 @@ public class CreateContributorRequest
   public const string Route = "/Contributors";
 
   [Required]
-  public string Name { get; set; } = String.Empty;
+  public string Name { get; set; } = string.Empty;
   public string? PhoneNumber { get; set; } = null;
 }
 
@@ -73,8 +54,7 @@ public class CreateContributorValidator : Validator<CreateContributorRequest>
   public CreateContributorValidator()
   {
     RuleFor(x => x.Name)
-      .NotEmpty()
-      .WithMessage("Name is required.")
+      .NotEmpty().WithMessage("Name is required.")
       .MinimumLength(2)
       .MaximumLength(ContributorName.MaxLength);
   }

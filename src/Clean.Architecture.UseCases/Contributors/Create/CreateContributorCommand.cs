@@ -1,4 +1,5 @@
 ﻿using Clean.Architecture.Core.ContributorAggregate;
+using LanguageExt;
 
 namespace Clean.Architecture.UseCases.Contributors.Create;
 
@@ -6,4 +7,4 @@ namespace Clean.Architecture.UseCases.Contributors.Create;
 /// Create a new Contributor.
 /// </summary>
 /// <param name="Name"></param>
-public record CreateContributorCommand(ContributorName Name, string? PhoneNumber) : ICommand<Result<ContributorId>>;
+public record CreateContributorCommand(ContributorName Name, string? PhoneNumber) : ICommand<Fin<ContributorId>>;
