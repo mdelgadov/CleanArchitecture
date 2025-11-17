@@ -40,7 +40,8 @@
       "dateTimeTimeZoneHandling": "Utc",
       "arrayType": "System.Collections.Generic.ICollection",
       "dictionaryType": "System.Collections.Generic.IDictionary",
-      "output": "Generated/ApiClient.cs"
+      "output": "Generated/ApiClient.cs",
+      "jsonLibrary": "SystemTextJson"
     }
   }
 }

@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="NSwag.CodeGeneration.CSharp" />
     <PackageReference Include="NSwag.MSBuild" PrivateAssets="all" />
   </ItemGroup>
