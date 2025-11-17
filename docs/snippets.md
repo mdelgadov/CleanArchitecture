@@ -1,9 +1,36 @@
 # Clean Architecture Template – Reusable Snippets
 
-A collection of practical snippets (Mediator, EF Core Fluent config, offline-first IDs, interceptors, JSON source-gen, testing).
+## Table of Contents
+1. Mediator Source Generator Registration
+2. Mediator Pipeline – Logging Behavior
+3. EF Core Fluent API – Vogen + Server-Assigned IDs
+4. Offline-First IDs – Client PK + Server ID
+5. SaveChanges Interceptor – Domain Event Dispatch
+6. System.Text.Json Source Generation (AOT Friendly)
+7. EF Tips for MAUI/AOT
+8. No-Op Mediator for Unit Tests
+9. Vogen EF Core Converters Partial Class
+10. Data Schema Constants
+11. Custom Vogen ID Value Generator (Reflection-Based)
+12. List Contributors Query Service (Raw SQL + Paging)
+13. Fake List Contributors Query Service (In-Memory)
+14. Contributor GetById Endpoint
+15. Infrastructure Service Registration
+16. Create Contributor Endpoint
+17. Delete Contributor Endpoint
+18. List Contributors Endpoint
+19. Update Contributor Endpoint
+20. Contributor ById Specification
+21. Vogen ID Value Generator (Reflection-Based)
+22. DbContext Options with In-Memory DB and Interceptor
+23. Db Context Registration Extension
+24. Domain Event Dispatcher Implementation
+25. EF Repository Implementation
+26. Infrastructure Service Extensions
 
-## 1) Mediator Source Generator registration
+---
 
+## 1. Mediator Source Generator Registration
 ```csharp
 // Register Mediator with explicit assemblies and pipeline behaviors
 services.AddMediator(options =>
@@ -29,8 +56,7 @@ services.AddMediator(options =>
 });
 ```
 
-## 2) Mediator pipeline – Logging behavior
-
+## 2. Mediator Pipeline – Logging Behavior
 ```csharp
 using System.Diagnostics;
 
@@ -55,10 +81,8 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 }
 ```
 
-## 3) EF Core Fluent API – Vogen + server-assigned IDs
-
+## 3. EF Core Fluent API – Vogen + Server-Assigned IDs
 Server supplies the IDs (e.g., from the backend). SQLite should never generate keys locally.
-
 ```csharp
 public class ContributorConfiguration : IEntityTypeConfiguration<Contributor>
 {
@@ -83,13 +107,10 @@ public class ContributorConfiguration : IEntityTypeConfiguration<Contributor>
   }
 }
 ```
-
 Alternative (DB-generated int keys, if you ever switch): replace `.ValueGeneratedNever()` with `.ValueGeneratedOnAdd()`.
 
-## 4) Offline-first IDs – client PK + server ID
-
+## 4. Offline-First IDs – Client PK + Server ID
 Use a client-stable Guid as the PK; set server ID after sync (keeps inserts working offline).
-
 ```csharp
 // Entity (conceptual)
 public class Contributor
@@ -116,11 +137,9 @@ public class ContributorConfiguration : IEntityTypeConfiguration<Contributor>
   }
 }
 ```
-
 Sync flow: send `ClientId` to the server as `ExternalId`, server upserts by `ExternalId`, returns `ServerId`. Client patches `ServerId` locally.
 
-## 5) SaveChanges interceptor – domain event dispatch
-
+## 5. SaveChanges Interceptor – Domain Event Dispatch
 ```csharp
 public sealed class EventDispatchInterceptor(IDomainEventDispatcher dispatcher) : SaveChangesInterceptor
 {
@@ -141,15 +160,12 @@ public sealed class EventDispatchInterceptor(IDomainEventDispatcher dispatcher) 
   }
 }
 ```
-
 Register with DbContext options:
-
 ```csharp
 options.AddInterceptors(sp.GetRequiredService<EventDispatchInterceptor>());
 ```
 
-## 6) System.Text.Json source generation (AOT friendly)
-
+## 6. System.Text.Json Source Generation (AOT Friendly)
 ```csharp
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -169,16 +185,14 @@ var json = JsonSerializer.Serialize(dto, AppJsonContext.Default.ContributorDto);
 var dto2 = JsonSerializer.Deserialize(json, AppJsonContext.Default.ContributorDto);
 ```
 
-## 7) EF tips for MAUI/AOT
-
+## 7. EF Tips for MAUI/AOT
 - Disable lazy loading proxies; use Include/explicit loading.
 - Prefer explicit configuration over scanning. Avoid `ApplyConfigurationsFromAssembly` on client.
 - Consider EF compiled models once schema stabilizes.
 - Keep value generators simple; avoid reflection-heavy generators on device.
 - For server-assigned IDs, use `ValueGeneratedNever`.
 
-## 8) No-op Mediator for unit tests
-
+## 8. No-Op Mediator for Unit Tests
 ```csharp
 public class NoOpMediator : IMediator
 {
@@ -207,8 +221,7 @@ public class NoOpMediator : IMediator
 }
 ```
 
-## 9) Vogen EF Core Converters partial class
-
+## 9. Vogen EF Core Converters Partial Class
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Vogen;
@@ -220,8 +233,7 @@ namespace Clean.Architecture.Infrastructure.Data.Config;
 internal partial class VogenEfCoreConverters;
 ```
 
-## 10) Data schema constants
-
+## 10. Data Schema Constants
 ```csharp
 namespace Clean.Architecture.Infrastructure.Data.Config;
 
@@ -231,8 +243,7 @@ public static class DataSchemaConstants
 }
 ```
 
-## 11) Custom Vogen ID Value Generator (reflection-based)
-
+## 11. Custom Vogen ID Value Generator (Reflection-Based)
 ```csharp
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
@@ -284,8 +295,7 @@ internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerato
 }
 ```
 
-## 12) List Contributors Query Service (raw SQL + paging)
-
+## 12. List Contributors Query Service (Raw SQL + Paging)
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors;
@@ -315,8 +325,7 @@ public class ListContributorsQueryService : IListContributorsQueryService
 }
 ```
 
-## 13) Fake List Contributors Query Service (in-memory)
-
+## 13. Fake List Contributors Query Service (In-Memory)
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors;
@@ -341,8 +350,7 @@ public class FakeListContributorsQueryService : IListContributorsQueryService
 }
 ```
 
-## 14) Contributor GetById Endpoint
-
+## 14. Contributor GetById Endpoint
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors;
@@ -398,8 +406,7 @@ public sealed class GetContributorByIdMapper
 }
 ```
 
-## 15) Infrastructure Service Registration
-
+## 15. Infrastructure Service Registration
 ```csharp
 using Clean.Architecture.Core.Interfaces;
 using Clean.Architecture.Core.Services;
@@ -453,8 +460,7 @@ public static class InfrastructureServiceExtensions
 }
 ```
 
-## 16) Create Contributor Endpoint
-
+## 16. Create Contributor Endpoint
 ```csharp
 using System.ComponentModel.DataAnnotations;
 using Clean.Architecture.Core.ContributorAggregate;
@@ -525,8 +531,7 @@ public class CreateContributorResponse(int id, string name)
 }
 ```
 
-## 17) Delete Contributor Endpoint
-
+## 17. Delete Contributor Endpoint
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors.Delete;
@@ -568,8 +573,7 @@ public class Delete : Endpoint<DeleteContributorRequest, Results<NoContent, Prob
 }
 ```
 
-## 18) List Contributors Endpoint
-
+## 18. List Contributors Endpoint
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors;
@@ -681,8 +685,7 @@ public sealed class ListContributorsMapper
 }
 ```
 
-## 19) Update Contributor Endpoint
-
+## 19. Update Contributor Endpoint
 ```csharp
 using Clean.Architecture.Core.ContributorAggregate;
 using Clean.Architecture.UseCases.Contributors; // for ContributorDto
@@ -739,4 +742,187 @@ public class Update(IMediator mediator)
 public sealed class UpdateContributorMapper : Mapper<UpdateContributorRequest, UpdateContributorResponse, ContributorDto>
 {
   public override UpdateContributorResponse FromEntity(ContributorDto e) => new(new ContributorRecord(e.Id.Value, e.Name.Value, ""));
+}
+```
+
+## 20. Contributor ById Specification
+```csharp
+public class ContributorByIdSpec : Specification<Contributor>
+{
+  public ContributorByIdSpec(ContributorId contributorId) =>
+    Query
+        .Where(contributor => contributor.Id == contributorId);
+}
+```
+
+## 21. Vogen ID Value Generator (Reflection-Based)
+```csharp
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
+
+namespace Clean.Architecture.Infrastructure.Data.Config;
+
+internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerator<TId>
+    where TContext : DbContext
+    where TEntityBase : EntityBase<TEntityBase, TId>
+    where TId : IVogen<TId, int>
+{
+  private readonly PropertyInfo _matchPropertyGetter;
+
+  public VogenIdValueGenerator()
+  {
+    var matchingProperties =
+        typeof(TContext).GetProperties().Where(p => p!.GetGetMethod()!.IsPublic && p.PropertyType == typeof(DbSet<TEntityBase>)).ToList();
+
+    if (matchingProperties.Count == 0)
+    {
+      throw new InvalidOperationException($"No properties found in the EFCore context for a DBSet of {nameof(TEntityBase)}");
+    }
+
+    if (matchingProperties.Count > 1)
+    {
+      throw new InvalidOperationException($"Multiple properties found in the EFCore context for a DBSet of {nameof(TEntityBase)}");
+    }
+
+    _matchPropertyGetter = matchingProperties[0];
+  }
+
+  public override TId Next(EntityEntry entry)
+  {
+    TContext ctx = (TContext)entry.Context;
+
+    DbSet<TEntityBase> entities = (DbSet<TEntityBase>)_matchPropertyGetter!.GetValue(ctx)!;
+
+    var next = Math.Max(
+        MaxFrom(entities.Local),
+        MaxFrom(entities)) + 1;
+
+    return TId.From(next);
+
+    static int MaxFrom(IEnumerable<TEntityBase> es) =>
+        es.Any() ? es.Max(e => e.Id.Value) : 0;
+  }
+
+  public override bool GeneratesTemporaryValues => false;
+}
+```
+
+## 22. DbContext Options with In-Memory DB and Interceptor
+```csharp
+using Clean.Architecture.Core.ContributorAggregate;
+
+namespace Clean.Architecture.Infrastructure.Data;
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+{
+  public DbSet<Contributor> Contributors => Set<Contributor>();
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    base.OnModelCreating(modelBuilder);
+    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+  }
+
+  public override int SaveChanges() =>
+        SaveChangesAsync().GetAwaiter().GetResult();
+}
+```
+
+## 23. Db Context Registration Extension
+```csharp
+public static class AppDbContextExtensions
+{
+  public static void AddApplicationDbContext(this IServiceCollection services, string connectionString) =>
+    services.AddDbContext<AppDbContext>(options =>
+         options.UseSqlServer(connectionString));
+}
+```
+
+## 24. Domain Event Dispatcher Implementation
+```csharp
+// Intercepts SaveChanges to dispatch domain events after changes are successfully saved
+public class EventDispatchInterceptor(IDomainEventDispatcher domainEventDispatcher) : SaveChangesInterceptor
+{
+  private readonly IDomainEventDispatcher _domainEventDispatcher = domainEventDispatcher;
+
+  // Called after SaveChangesAsync has completed successfully
+  public override async ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result,
+    CancellationToken cancellationToken = new CancellationToken())
+  {
+    var context = eventData.Context;
+    if (context is not AppDbContext appDbContext)
+    {
+      return await base.SavedChangesAsync(eventData, result, cancellationToken).ConfigureAwait(false);
+    }
+
+    // Retrieve all tracked entities that have domain events
+    var entitiesWithEvents = appDbContext.ChangeTracker.Entries<HasDomainEventsBase>()
+      .Select(e => e.Entity)
+      .Where(e => e.DomainEvents.Any())
+      .ToArray();
+
+    // Dispatch and clear domain events
+    await _domainEventDispatcher.DispatchAndClearEvents(entitiesWithEvents);
+
+    return await base.SavedChangesAsync(eventData, result, cancellationToken);
+  }
+}
+```
+
+## 25. EF Repository Implementation
+```csharp
+// inherit from Ardalis.Specification type
+public class EfRepository<T>(AppDbContext dbContext) :
+  RepositoryBase<T>(dbContext), IReadRepository<T>, IRepository<T> where T : class, IAggregateRoot
+{
+}
+```
+
+## 26. Infrastructure Service Extensions
+```csharp
+public static class InfrastructureServiceExtensions
+{
+  public static IServiceCollection AddInfrastructureServices(
+    this IServiceCollection services,
+    ConfigurationManager config,
+    ILogger logger)
+  {
+    // Try to get connection strings in order of priority:
+    // 1. "cleanarchitecture" - provided by Aspire when using .WithReference(cleanArchDb)
+    // 2. "DefaultConnection" - traditional SQL Server connection
+    // 3. "SqliteConnection" - fallback to SQLite
+    string? connectionString = config.GetConnectionString("cleanarchitecture")
+                               ?? config.GetConnectionString("DefaultConnection")
+                               ?? config.GetConnectionString("SqliteConnection");
+    Guard.Against.Null(connectionString);
+
+    services.AddScoped<EventDispatchInterceptor>();
+    services.AddScoped<IDomainEventDispatcher, MediatorDomainEventDispatcher>();
+
+    services.AddDbContext<AppDbContext>((provider, options) =>
+    {
+      var eventDispatchInterceptor = provider.GetRequiredService<EventDispatchInterceptor>();
+
+      // Use SQL Server if Aspire or DefaultConnection is available, otherwise use SQLite
+      if (config.GetConnectionString("cleanarchitecture") != null ||
+          config.GetConnectionString("DefaultConnection") != null)
+      {
+        options.UseSqlServer(connectionString);
+      }
+      else
+      {
+        throw new InvalidOperationException("Missing connection string: No valid database connection string found in configuration.");
+      }
+
+      options.AddInterceptors(eventDispatchInterceptor);
+    });
+
+    services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
+           .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
+           .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
+           .AddScoped<IDeleteContributorService, DeleteContributorService>();
+
+    logger.LogInformation("{Project} services registered", "Infrastructure");
+
+    return services;
+  }
 }
