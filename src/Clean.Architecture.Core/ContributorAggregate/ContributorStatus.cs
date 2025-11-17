@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Core.ContributorAggregate;
+﻿namespace Core.ContributorAggregate;
 
 public class ContributorStatus : SmartEnum<ContributorStatus>
 {

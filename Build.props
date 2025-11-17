@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.Build.Traversal">
   <ItemGroup>
-    <ProjectReference Include="src/Clean.Architecture.Sdk/Clean.Architecture.Sdk.csproj" />
-    <ProjectReference Include="src/Clean.Architecture.Core/Clean.Architecture.Core.csproj" />
-    <ProjectReference Include="src/Clean.Architecture.UseCases/Clean.Architecture.UseCases.csproj" />
-    <ProjectReference Include="src/Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj" />
-    <ProjectReference Include="src/Clean.Architecture.Web/Clean.Architecture.Web.csproj" />
-    <ProjectReference Include="src/Clean.Architecture.ServiceDefaults/Clean.Architecture.ServiceDefaults.csproj" />
-    <ProjectReference Include="src/Clean.Architecture.AspireHost/Clean.Architecture.AspireHost.csproj" />
-    <ProjectReference Include="tests/Clean.Architecture.UnitTests/Clean.Architecture.UnitTests.csproj" />
-    <ProjectReference Include="tests/Clean.Architecture.IntegrationTests/Clean.Architecture.IntegrationTests.csproj" />
-    <ProjectReference Include="tests/Clean.Architecture.FunctionalTests/Clean.Architecture.FunctionalTests.csproj" />
+    <ProjectReference Include="src/Sdk/Sdk.csproj" />
+    <ProjectReference Include="src/Core/Core.csproj" />
+    <ProjectReference Include="src/UseCases/UseCases.csproj" />
+    <ProjectReference Include="src/Infrastructure/Infrastructure.csproj" />
+    <ProjectReference Include="src/Web/Web.csproj" />
+    <ProjectReference Include="src/ServiceDefaults/ServiceDefaults.csproj" />
+    <ProjectReference Include="src/AspireHost/AspireHost.csproj" />
+    <ProjectReference Include="tests/UnitTests/UnitTests.csproj" />
+    <ProjectReference Include="tests/IntegrationTests/IntegrationTests.csproj" />
+    <ProjectReference Include="tests/FunctionalTests/FunctionalTests.csproj" />
   </ItemGroup>
 
   <!-- Aggregate target so you can: dotnet build -t:GenerateClients [-p:ApiBaseUrl=https://...] -->
   <Target Name="GenerateClients">
-    <MSBuild Projects="src/Clean.Architecture.Sdk/Clean.Architecture.Sdk.csproj"
+    <MSBuild Projects="src/Sdk/Sdk.csproj"
              Targets="GenerateSdkClient"
              Properties="ApiBaseUrl=$(ApiBaseUrl)" />
   </Target>

@@ -1,6 +1,6 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.Core.Interfaces;
+namespace Core.Interfaces;
 
 public interface IDeleteContributorService
 {

@@ -1,7 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
+
 using Vogen;
 
-namespace Clean.Architecture.Infrastructure.Data.Config;
+namespace Infrastructure.Data.Config;
 
 [EfCoreConverter<ContributorId>]
 [EfCoreConverter<ContributorName>]

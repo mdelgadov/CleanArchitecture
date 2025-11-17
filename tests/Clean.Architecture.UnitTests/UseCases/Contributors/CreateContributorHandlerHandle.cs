@@ -1,4 +1,8 @@
-﻿namespace Clean.Architecture.UnitTests.UseCases.Contributors;
+﻿using UseCases.Contributors.Create;
+
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace UnitTests.UseCases.Contributors;
 
 public class CreateContributorHandlerHandle
 {

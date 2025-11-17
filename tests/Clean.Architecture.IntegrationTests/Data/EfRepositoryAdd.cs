@@ -1,6 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.IntegrationTests.Data;
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace IntegrationTests.Data;
 
 public class EfRepositoryAdd : BaseEfRepoTestFixture
 {
@@ -20,6 +22,6 @@ public class EfRepositoryAdd : BaseEfRepoTestFixture
     newContributor.ShouldNotBeNull();
     testContributorName.ShouldBe(newContributor.Name);
     testContributorStatus.ShouldBe(newContributor.Status);
-    newContributor.Id.Value.ShouldBeGreaterThan(0);
+    ShouldBeTestExtensions.ShouldBeGreaterThan(newContributor.Id.Value, 0);
   }
 }

@@ -223,10 +223,10 @@ public class NoOpMediator : IMediator
 
 ## 9. Vogen EF Core Converters Partial Class
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
+using Core.ContributorAggregate;
 using Vogen;
 
-namespace Clean.Architecture.Infrastructure.Data.Config;
+namespace Infrastructure.Data.Config;
 
 [EfCoreConverter<ContributorId>]
 [EfCoreConverter<ContributorName>]
@@ -235,7 +235,7 @@ internal partial class VogenEfCoreConverters;
 
 ## 10. Data Schema Constants
 ```csharp
-namespace Clean.Architecture.Infrastructure.Data.Config;
+namespace Infrastructure.Data.Config;
 
 public static class DataSchemaConstants
 {
@@ -248,7 +248,7 @@ public static class DataSchemaConstants
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace Clean.Architecture.Infrastructure.Data.Config;
+namespace Infrastructure.Data.Config;
 
 internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerator<TId>
     where TContext : DbContext
@@ -297,11 +297,11 @@ internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerato
 
 ## 12. List Contributors Query Service (Raw SQL + Paging)
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.List;
+using Core.ContributorAggregate;
+using UseCases.Contributors;
+using UseCases.Contributors.List;
 
-namespace Clean.Architecture.Infrastructure.Data.Queries;
+namespace Infrastructure.Data.Queries;
 
 public class ListContributorsQueryService : IListContributorsQueryService
 {
@@ -327,11 +327,11 @@ public class ListContributorsQueryService : IListContributorsQueryService
 
 ## 13. Fake List Contributors Query Service (In-Memory)
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.List;
+using Core.ContributorAggregate;
+using UseCases.Contributors;
+using UseCases.Contributors.List;
 
-namespace Clean.Architecture.Infrastructure.Data.Queries;
+namespace Infrastructure.Data.Queries;
 
 public class FakeListContributorsQueryService : IListContributorsQueryService
 {
@@ -352,12 +352,12 @@ public class FakeListContributorsQueryService : IListContributorsQueryService
 
 ## 14. Contributor GetById Endpoint
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.Get;
+using Core.ContributorAggregate;
+using UseCases.Contributors;
+using UseCases.Contributors.Get;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Web.Contributors;
 
 public class GetById(IMediator mediator)
   : Endpoint<GetContributorByIdRequest,
@@ -408,13 +408,13 @@ public sealed class GetContributorByIdMapper
 
 ## 15. Infrastructure Service Registration
 ```csharp
-using Clean.Architecture.Core.Interfaces;
-using Clean.Architecture.Core.Services;
-using Clean.Architecture.Infrastructure.Data;
-using Clean.Architecture.Infrastructure.Data.Queries;
-using Clean.Architecture.UseCases.Contributors.List;
+using Core.Interfaces;
+using Core.Services;
+using Infrastructure.Data;
+using Infrastructure.Data.Queries;
+using UseCases.Contributors.List;
 
-namespace Clean.Architecture.Infrastructure;
+namespace Infrastructure;
 
 public static class InfrastructureServiceExtensions
 {
@@ -463,12 +463,12 @@ public static class InfrastructureServiceExtensions
 ## 16. Create Contributor Endpoint
 ```csharp
 using System.ComponentModel.DataAnnotations;
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors.Create;
+using Core.ContributorAggregate;
+using UseCases.Contributors.Create;
 using FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Web.Contributors;
 
 public class Create(IMediator mediator)
   : Endpoint<CreateContributorRequest, Results<Created<CreateContributorResponse>, ProblemHttpResult>>
@@ -533,11 +533,11 @@ public class CreateContributorResponse(int id, string name)
 
 ## 17. Delete Contributor Endpoint
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors.Delete;
+using Core.ContributorAggregate;
+using UseCases.Contributors.Delete;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Web.Contributors;
 
 public class Delete : Endpoint<DeleteContributorRequest, Results<NoContent, ProblemHttpResult>>
 {
@@ -575,12 +575,12 @@ public class Delete : Endpoint<DeleteContributorRequest, Results<NoContent, Prob
 
 ## 18. List Contributors Endpoint
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.List;
+using Core.ContributorAggregate;
+using UseCases.Contributors;
+using UseCases.Contributors.List;
 using FluentValidation;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Web.Contributors;
 
 public class List(IMediator mediator) : Endpoint<ListContributorsRequest, ContributorListResponse, ListContributorsMapper>
 {
@@ -687,12 +687,12 @@ public sealed class ListContributorsMapper
 
 ## 19. Update Contributor Endpoint
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors; // for ContributorDto
-using Clean.Architecture.UseCases.Contributors.Update;
+using Core.ContributorAggregate;
+using UseCases.Contributors; // for ContributorDto
+using UseCases.Contributors.Update;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Web.Contributors;
 
 public class Update(IMediator mediator)
   : Endpoint<UpdateContributorRequest, Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>, UpdateContributorMapper>
@@ -760,7 +760,7 @@ public class ContributorByIdSpec : Specification<Contributor>
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace Clean.Architecture.Infrastructure.Data.Config;
+namespace Infrastructure.Data.Config;
 
 internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerator<TId>
     where TContext : DbContext
@@ -809,9 +809,9 @@ internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerato
 
 ## 22. DbContext Options with In-Memory DB and Interceptor
 ```csharp
-using Clean.Architecture.Core.ContributorAggregate;
+using Core.ContributorAggregate;
 
-namespace Clean.Architecture.Infrastructure.Data;
+namespace Infrastructure.Data;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
   public DbSet<Contributor> Contributors => Set<Contributor>();

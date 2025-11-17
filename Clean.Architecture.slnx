@@ -14,21 +14,21 @@
     <File Path="prompt-spec.schema.yaml" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/Clean.Architecture.Core/Clean.Architecture.Core.csproj" />
-    <Project Path="src/Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj" />
-    <Project Path="src/Clean.Architecture.Sdk/Clean.Architecture.Sdk.csproj" />
-    <Project Path="src/Clean.Architecture.UseCases/Clean.Architecture.UseCases.csproj" />
-    <Project Path="src/Clean.Architecture.Web/Clean.Architecture.Web.csproj" />
+    <Project Path="src/Clean.Architecture.Core/Core.csproj" />
+    <Project Path="src/Clean.Architecture.Infrastructure/Infrastructure.csproj" />
+    <Project Path="src/Clean.Architecture.Sdk/Sdk.csproj" />
+    <Project Path="src/Clean.Architecture.UseCases/UseCases.csproj" />
+    <Project Path="src/Clean.Architecture.Web/Web.csproj" />
   </Folder>
   <Folder Name="/src/_aspire/">
-    <Project Path="src/Clean.Architecture.AspireHost/Clean.Architecture.AspireHost.csproj" />
-    <Project Path="src/Clean.Architecture.ServiceDefaults/Clean.Architecture.ServiceDefaults.csproj" />
+    <Project Path="src/Clean.Architecture.AspireHost/AspireHost.csproj" />
+    <Project Path="src/Clean.Architecture.ServiceDefaults/ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Clean.Architecture.FunctionalTests/Clean.Architecture.FunctionalTests.csproj" />
-    <Project Path="tests/Clean.Architecture.IntegrationTests/Clean.Architecture.IntegrationTests.csproj">
-      <BuildDependency Project="src/Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj" />
+    <Project Path="tests/Clean.Architecture.FunctionalTests/FunctionalTests.csproj" />
+    <Project Path="tests/Clean.Architecture.IntegrationTests/IntegrationTests.csproj">
+      <BuildDependency Project="src/Clean.Architecture.Infrastructure/Infrastructure.csproj" />
     </Project>
-    <Project Path="tests/Clean.Architecture.UnitTests/Clean.Architecture.UnitTests.csproj" />
+    <Project Path="tests/Clean.Architecture.UnitTests/UnitTests.csproj" />
   </Folder>
 </Solution>

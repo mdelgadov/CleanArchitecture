@@ -1,9 +1,11 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.List;
+﻿using Core.ContributorAggregate;
+
 using FluentValidation;
 
-namespace Clean.Architecture.Web.Contributors;
+using UseCases.Contributors;
+using UseCases.Contributors.List;
+
+namespace Web.Contributors;
 
 public class List(IMediator mediator) : Endpoint<ListContributorsRequest, ContributorListResponse, ListContributorsMapper>
 {

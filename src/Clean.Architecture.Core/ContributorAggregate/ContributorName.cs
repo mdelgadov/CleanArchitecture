@@ -1,6 +1,6 @@
 ﻿using Vogen;
 
-namespace Clean.Architecture.Core.ContributorAggregate;
+namespace Core.ContributorAggregate;
 
 [ValueObject<string>(conversions: Conversions.SystemTextJson)]
 public partial struct ContributorName

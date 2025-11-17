@@ -1,6 +1,6 @@
-﻿using Clean.Architecture.Core.ContributorAggregate.Events;
+﻿using Core.ContributorAggregate.Events;
 
-namespace Clean.Architecture.Core.ContributorAggregate;
+namespace Core.ContributorAggregate;
 
 public class Contributor(ContributorName name) : EntityBase<Contributor, ContributorId>, IAggregateRoot
 {

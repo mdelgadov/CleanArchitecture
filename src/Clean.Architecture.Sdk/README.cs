@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Sdk;
+﻿namespace Sdk;
 
 public static class SdkReadme
 {

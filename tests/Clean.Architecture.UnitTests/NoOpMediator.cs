@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.UnitTests;
+﻿namespace UnitTests;
 
 public class NoOpMediator : IMediator
 {

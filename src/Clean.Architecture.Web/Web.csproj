@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clean.Architecture.Infrastructure\Clean.Architecture.Infrastructure.csproj" />
-    <ProjectReference Include="..\Clean.Architecture.UseCases\Clean.Architecture.UseCases.csproj" />
-    <ProjectReference Include="..\Clean.Architecture.ServiceDefaults\Clean.Architecture.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Clean.Architecture.Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Clean.Architecture.UseCases\UseCases.csproj" />
+    <ProjectReference Include="..\Clean.Architecture.ServiceDefaults\ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>

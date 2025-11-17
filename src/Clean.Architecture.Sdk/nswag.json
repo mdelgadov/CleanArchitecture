@@ -13,7 +13,7 @@
   "codeGenerators": {
     "openApiToCSharpClient": {
       "className": "ApiClient",
-      "namespace": "Clean.Architecture.Sdk.Client",
+      "namespace": "Sdk.Client",
       "generateClientInterfaces": true,
       "injectHttpClient": true,
       "useHttpClientCreationMethod": false,
@@ -30,7 +30,7 @@
       "clientClassAccessModifier": "public",
       "typeAccessModifier": "public",
       "generateContractsOutput": false,
-      "contractsNamespace": "Clean.Architecture.Sdk.Contracts",
+      "contractsNamespace": "Sdk.Contracts",
       "parameterDateTimeFormat": "s",
       "parameterDateTimeTimeZoneHandling": "Utc",
       "serializeTypeInformation": false,

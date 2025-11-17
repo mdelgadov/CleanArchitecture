@@ -1,9 +1,13 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors; // for ContributorDto
-using Clean.Architecture.UseCases.Contributors.Update;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+using UseCases.Contributors;
+using UseCases.Contributors.Update;
+
+using ContributorId = Core.ContributorAggregate.ContributorId;
+using ContributorName = Core.ContributorAggregate.ContributorName;
+// for ContributorDto
+
+namespace Web.Contributors;
 
 public class Update(IMediator mediator)
   : Endpoint<UpdateContributorRequest, Results<Ok<UpdateContributorResponse>, NotFound, ProblemHttpResult>, UpdateContributorMapper>

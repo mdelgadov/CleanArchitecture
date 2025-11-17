@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.UseCases;
+﻿namespace UseCases;
 
 public class Constants
 {

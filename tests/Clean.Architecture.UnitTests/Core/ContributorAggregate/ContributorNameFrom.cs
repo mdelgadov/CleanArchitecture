@@ -1,4 +1,5 @@
-﻿namespace Clean.Architecture.UnitTests.Core.ContributorAggregate;
+﻿namespace UnitTests.Core.ContributorAggregate;
+
 
 public class ContributorNameFrom
 {
@@ -7,7 +8,7 @@ public class ContributorNameFrom
   {
     string validValue = "ardalis";
     var contributorName = ContributorName.From(validValue);
-    Assert.Equal(validValue, contributorName.Value);
+    Assert.Equal(validValue, (string?)contributorName.Value);
   }
 
   [Theory]

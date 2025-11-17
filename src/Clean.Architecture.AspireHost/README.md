@@ -8,7 +8,7 @@ The Aspire host is configured to run a SQL Server container and automatically pr
 
 ### Running the Application
 
-1. Set `Clean.Architecture.AspireHost` as the startup project
+1. Set `AspireHost` as the startup project
 2. Run the application (F5 or Ctrl+F5)
 3. The Aspire Dashboard will open, showing all running resources including the SQL Server container
 4. The Web application will automatically connect to the SQL Server container
@@ -27,12 +27,12 @@ The existing migrations were created for SQLite but will work with SQL Server as
 
 From the Web project directory:
 ```bash
-dotnet ef migrations add MigrationName -c AppDbContext -p ../Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj -s Clean.Architecture.Web.csproj -o Data/Migrations
+dotnet ef migrations add MigrationName -c AppDbContext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj -o Data/Migrations
 ```
 
 To update the database:
 ```bash
-dotnet ef database update -c AppDbContext -p ../Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj -s Clean.Architecture.Web.csproj
+dotnet ef database update -c AppDbContext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
 ```
 
 Note: When running through Aspire, the database will be automatically created in the SQL Server container if it doesn't exist.

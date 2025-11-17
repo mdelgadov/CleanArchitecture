@@ -1,8 +1,9 @@
-﻿using Clean.Architecture.Core.Interfaces;
-using Clean.Architecture.Infrastructure;
-using Clean.Architecture.Infrastructure.Email;
+﻿using Core.Interfaces;
 
-namespace Clean.Architecture.Web.Configurations;
+using Infrastructure;
+using Infrastructure.Email;
+
+namespace Web.Configurations;
 
 public static class ServiceConfigs
 {

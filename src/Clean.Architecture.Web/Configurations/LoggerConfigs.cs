@@ -1,6 +1,4 @@
-﻿using Serilog;
-
-namespace Clean.Architecture.Web.Configurations;
+﻿namespace Web.Configurations;
 
 public static class LoggerConfigs
 {

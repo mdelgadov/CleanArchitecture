@@ -1,4 +1,5 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.UseCases.Contributors;
+namespace UseCases.Contributors;
+
 public record ContributorDto(ContributorId Id, ContributorName Name, PhoneNumber PhoneNumber);

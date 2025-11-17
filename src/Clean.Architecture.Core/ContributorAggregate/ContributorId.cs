@@ -4,7 +4,7 @@
         staticAbstractsGeneration: StaticAbstractsGeneration.MostCommon | StaticAbstractsGeneration.InstanceMethodsAndProperties)]
 
 
-namespace Clean.Architecture.Core.ContributorAggregate;
+namespace Core.ContributorAggregate;
 
 [ValueObject<int>]
 public readonly partial struct ContributorId

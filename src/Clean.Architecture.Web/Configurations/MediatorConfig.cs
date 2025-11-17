@@ -1,9 +1,12 @@
 ﻿using Ardalis.SharedKernel;
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.Infrastructure;
-using Clean.Architecture.UseCases.Contributors.Create;
 
-namespace Clean.Architecture.Web.Configurations;
+using Core.ContributorAggregate;
+
+using Infrastructure;
+
+using UseCases.Contributors.Create;
+
+namespace Web.Configurations;
 
 public static class MediatorConfig
 {

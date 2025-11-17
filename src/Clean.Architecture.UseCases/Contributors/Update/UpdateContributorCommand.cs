@@ -1,6 +1,5 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using LanguageExt;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.UseCases.Contributors.Update;
+namespace UseCases.Contributors.Update;
 
 public record UpdateContributorCommand(ContributorId ContributorId, ContributorName NewName) : ICommand<Fin<Option<ContributorDto>>>;

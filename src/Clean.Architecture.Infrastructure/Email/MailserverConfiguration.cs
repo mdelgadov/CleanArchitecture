@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Infrastructure.Email;
+﻿namespace Infrastructure.Email;
 
 public class MailserverConfiguration()
 {

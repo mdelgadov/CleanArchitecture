@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Infrastructure.Data;
+﻿namespace Infrastructure.Data;
 
 public static class AppDbContextExtensions
 {

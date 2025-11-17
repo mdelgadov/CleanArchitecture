@@ -1,6 +1,7 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.Infrastructure.Data;
+namespace Infrastructure.Data;
+
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
   public DbSet<Contributor> Contributors => Set<Contributor>();

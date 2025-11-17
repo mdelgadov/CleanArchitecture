@@ -1,6 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate.Events;
+﻿using Core.ContributorAggregate.Events;
 
-namespace Clean.Architecture.UnitTests.Core.ContributorAggregate;
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace UnitTests.Core.ContributorAggregate;
 
 public class ContributorUpdateName
 {

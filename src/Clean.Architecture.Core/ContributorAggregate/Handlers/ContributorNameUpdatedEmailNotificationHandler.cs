@@ -1,7 +1,7 @@
-﻿using Clean.Architecture.Core.ContributorAggregate.Events;
-using Clean.Architecture.Core.Interfaces;
+﻿using Core.ContributorAggregate.Events;
+using Core.Interfaces;
 
-namespace Clean.Architecture.Core.ContributorAggregate.Handlers;
+namespace Core.ContributorAggregate.Handlers;
 
 public class ContributorNameUpdatedEmailNotificationHandler(
   ILogger<ContributorDeletedHandler> logger,

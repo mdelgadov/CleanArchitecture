@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 
-namespace Clean.Architecture.Infrastructure.Data.Config;
+namespace Infrastructure.Data.Config;
 
 internal class VogenIdValueGenerator<TContext, TEntityBase, TId> : ValueGenerator<TId>
     where TContext : DbContext

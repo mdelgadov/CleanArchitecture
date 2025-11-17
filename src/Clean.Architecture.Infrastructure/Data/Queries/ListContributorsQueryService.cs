@@ -1,8 +1,9 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.List;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.Infrastructure.Data.Queries;
+using UseCases.Contributors;
+using UseCases.Contributors.List;
+
+namespace Infrastructure.Data.Queries;
 
 public class ListContributorsQueryService : IListContributorsQueryService
 {

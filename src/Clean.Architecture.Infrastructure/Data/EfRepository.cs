@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Infrastructure.Data;
+﻿namespace Infrastructure.Data;
 
 // inherit from Ardalis.Specification type
 public class EfRepository<T>(AppDbContext dbContext) :

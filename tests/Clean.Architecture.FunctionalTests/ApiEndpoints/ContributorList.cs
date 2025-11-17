@@ -1,7 +1,9 @@
-﻿using Clean.Architecture.Infrastructure.Data;
-using Clean.Architecture.Web.Contributors;
+﻿using Infrastructure.Data;
 
-namespace Clean.Architecture.FunctionalTests.ApiEndpoints;
+using Web;
+using Web.Contributors;
+
+namespace FunctionalTests.ApiEndpoints;
 
 [Collection("Sequential")]
 public class ContributorList(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>

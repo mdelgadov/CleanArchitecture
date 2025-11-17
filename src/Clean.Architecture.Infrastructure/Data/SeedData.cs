@@ -1,6 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.Infrastructure.Data;
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace Infrastructure.Data;
 
 public static class SeedData
 {
@@ -21,7 +23,7 @@ public static class SeedData
     await dbContext.SaveChangesAsync();
 
     // add a bunch more contributors to support demonstrating paging
-    for (int i = 1; i <= NUMBER_OF_CONTRIBUTORS-2; i++)
+    for (int i = 1; i <= NUMBER_OF_CONTRIBUTORS - 2; i++)
     {
       dbContext.Contributors.Add(new Contributor(ContributorName.From($"Contributor {i}")));
     }

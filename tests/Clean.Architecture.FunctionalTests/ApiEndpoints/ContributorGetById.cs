@@ -1,8 +1,9 @@
-﻿using Clean.Architecture.Infrastructure.Data;
-using Clean.Architecture.Web.Contributors;
+﻿using Infrastructure.Data;
 
+using Web;
+using Web.Contributors;
 
-namespace Clean.Architecture.FunctionalTests.ApiEndpoints;
+namespace FunctionalTests.ApiEndpoints;
 
 [Collection("Sequential")]
 public class ContributorGetById(CustomWebApplicationFactory<Program> factory) : IClassFixture<CustomWebApplicationFactory<Program>>
@@ -15,7 +16,7 @@ public class ContributorGetById(CustomWebApplicationFactory<Program> factory) : 
     var result = await _client.GetAndDeserializeAsync<ContributorRecord>(GetContributorByIdRequest.BuildRoute(1));
 
     result.Id.ShouldBe(1);
-    result.Name.ShouldBe(SeedData.Contributor1.Name.Value);
+    ShouldBeStringTestExtensions.ShouldBe(result.Name, SeedData.Contributor1.Name.Value);
   }
 
   [Fact]

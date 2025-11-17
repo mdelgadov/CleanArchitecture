@@ -1,6 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.IntegrationTests.Data;
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace IntegrationTests.Data;
 
 public class EfRepositoryUpdate : BaseEfRepoTestFixture
 {

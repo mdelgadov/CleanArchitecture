@@ -1,8 +1,10 @@
-﻿using Clean.Architecture.Infrastructure.Data;
+﻿using Infrastructure.Data;
+
 using Microsoft.EntityFrameworkCore;
+
 using Testcontainers.MsSql;
 
-namespace Clean.Architecture.FunctionalTests;
+namespace FunctionalTests;
 
 public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram>, IAsyncLifetime where TProgram : class
 {
@@ -50,7 +52,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
       {
         // Apply migrations to create the database schema
         db.Database.Migrate();
-        
+
         // Seed the database with test data.
         SeedData.PopulateTestDataAsync(db).Wait();
       }

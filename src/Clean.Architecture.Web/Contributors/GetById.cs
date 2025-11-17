@@ -1,9 +1,11 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors;
-using Clean.Architecture.UseCases.Contributors.Get;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+using UseCases.Contributors;
+using UseCases.Contributors.Get;
+
+using ContributorId = Core.ContributorAggregate.ContributorId;
+
+namespace Web.Contributors;
 
 public class GetById(IMediator mediator)
   : Endpoint<GetContributorByIdRequest,

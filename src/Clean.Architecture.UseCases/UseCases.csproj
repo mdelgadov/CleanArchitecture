@@ -6,7 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clean.Architecture.Core\Clean.Architecture.Core.csproj" />
+    <ProjectReference Include="..\Clean.Architecture.Core\Core.csproj" />
   </ItemGroup>
 
 </Project>

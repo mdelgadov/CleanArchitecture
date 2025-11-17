@@ -1,7 +1,6 @@
-﻿using FastEndpoints;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace Web.Contributors;
 
 /// <summary>
 /// See: https://fast-endpoints.com/docs/validation

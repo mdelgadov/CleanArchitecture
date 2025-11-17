@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Clean.Architecture.Infrastructure.Data.Migrations;
+namespace Infrastructure.Data.Migrations;
 
 /// <inheritdoc />
 public partial class PhoneNumber : Migration

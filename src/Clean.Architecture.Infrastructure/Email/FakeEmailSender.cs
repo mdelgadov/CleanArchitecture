@@ -1,6 +1,6 @@
-﻿using Clean.Architecture.Core.Interfaces;
+﻿using Core.Interfaces;
 
-namespace Clean.Architecture.Infrastructure.Email;
+namespace Infrastructure.Email;
 
 public class FakeEmailSender(ILogger<FakeEmailSender> logger) : IEmailSender
 {

@@ -1,7 +1,8 @@
 ﻿using Ardalis.ListStartupServices;
-using Clean.Architecture.Infrastructure.Email;
 
-namespace Clean.Architecture.Web.Configurations;
+using Infrastructure.Email;
+
+namespace Web.Configurations;
 
 public static class OptionConfigs
 {

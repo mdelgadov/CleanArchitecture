@@ -1,7 +1,8 @@
-﻿using Clean.Architecture.Core.Interfaces;
+﻿using Core.Interfaces;
+
 using LUnit = LanguageExt.Unit;
 
-namespace Clean.Architecture.UseCases.Contributors.Delete;
+namespace UseCases.Contributors.Delete;
 
 public class DeleteContributorHandler(IDeleteContributorService _deleteContributorService)
   : ICommandHandler<DeleteContributorCommand, Fin<LUnit>>

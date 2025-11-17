@@ -1,11 +1,11 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.UseCases.Contributors.Update;
+namespace UseCases.Contributors.Update;
 
 public class UpdateContributorHandler(IRepository<Contributor> _repository)
   : ICommandHandler<UpdateContributorCommand, Fin<Option<ContributorDto>>>
 {
-  public async ValueTask<Fin<Option<ContributorDto>>> Handle(UpdateContributorCommand command, 
+  public async ValueTask<Fin<Option<ContributorDto>>> Handle(UpdateContributorCommand command,
     CancellationToken ct)
   {
     var existingContributor = await _repository.GetByIdAsync(command.ContributorId, ct);

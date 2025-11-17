@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors.Create;
+
 using FluentValidation;
+
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+using UseCases.Contributors.Create;
+
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace Web.Contributors;
 
 public class Create(IMediator mediator)
   : Endpoint<CreateContributorRequest, Results<Created<CreateContributorResponse>, ProblemHttpResult>>
@@ -56,7 +60,7 @@ public class CreateContributorValidator : Validator<CreateContributorRequest>
     RuleFor(x => x.Name)
       .NotEmpty().WithMessage("Name is required.")
       .MinimumLength(2)
-      .MaximumLength(ContributorName.MaxLength);
+      .MaximumLength(Core.ContributorAggregate.ContributorName.MaxLength);
   }
 }
 

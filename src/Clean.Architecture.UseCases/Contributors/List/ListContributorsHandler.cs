@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.UseCases.Contributors.List;
+﻿namespace UseCases.Contributors.List;
 
 public class ListContributorsHandler : IQueryHandler<ListContributorsQuery, Fin<PagedResult<ContributorDto>>>
 {

@@ -1,5 +1,5 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.UseCases.Contributors.Get;
+namespace UseCases.Contributors.Get;
 
 public record GetContributorQuery(ContributorId ContributorId) : IQuery<Fin<Option<ContributorDto>>>;

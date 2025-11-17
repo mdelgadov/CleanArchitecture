@@ -1,7 +1,6 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using LanguageExt;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.UseCases.Contributors.Create;
+namespace UseCases.Contributors.Create;
 
 /// <summary>
 /// Create a new Contributor.

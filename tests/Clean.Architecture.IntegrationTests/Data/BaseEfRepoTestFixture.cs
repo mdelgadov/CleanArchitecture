@@ -1,7 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.Infrastructure.Data;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.IntegrationTests.Data;
+using Infrastructure.Data;
+
+namespace IntegrationTests.Data;
 
 public abstract class BaseEfRepoTestFixture
 {

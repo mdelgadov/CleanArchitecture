@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Core.ContributorAggregate.Events;
+﻿namespace Core.ContributorAggregate.Events;
 
 public sealed class ContributorNameUpdatedEvent(Contributor contributor) : DomainEventBase
 {

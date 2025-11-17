@@ -1,4 +1,5 @@
-﻿namespace Clean.Architecture.UnitTests.Core.ContributorAggregate;
+﻿namespace UnitTests.Core.ContributorAggregate;
+
 
 public class ContributorIdFrom
 {

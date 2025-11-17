@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Core.ContributorAggregate.Specifications;
+﻿namespace Core.ContributorAggregate.Specifications;
 
 public class ContributorByIdSpec : Specification<Contributor>
 {

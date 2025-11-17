@@ -1,8 +1,10 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
-using Clean.Architecture.UseCases.Contributors.Delete;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace Clean.Architecture.Web.Contributors;
+using UseCases.Contributors.Delete;
+
+using ContributorId = Core.ContributorAggregate.ContributorId;
+
+namespace Web.Contributors;
 
 public class Delete : Endpoint<DeleteContributorRequest, Results<NoContent, ProblemHttpResult>>
 {

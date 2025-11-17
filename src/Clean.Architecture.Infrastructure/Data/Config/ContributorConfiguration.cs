@@ -1,6 +1,8 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Infrastructure.Data.Config;
 
-namespace Clean.Architecture.Infrastructure.Data.Config;
+using Core.ContributorAggregate;
+
+namespace Infrastructure.Data.Config;
 
 public class ContributorConfiguration : IEntityTypeConfiguration<Contributor>
 {

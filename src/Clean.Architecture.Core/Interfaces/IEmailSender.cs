@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Core.Interfaces;
+﻿namespace Core.Interfaces;
 
 public interface IEmailSender
 {

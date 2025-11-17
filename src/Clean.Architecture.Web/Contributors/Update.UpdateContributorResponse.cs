@@ -1,4 +1,4 @@
-﻿namespace Clean.Architecture.Web.Contributors;
+﻿namespace Web.Contributors;
 
 public class UpdateContributorResponse(ContributorRecord contributor)
 {

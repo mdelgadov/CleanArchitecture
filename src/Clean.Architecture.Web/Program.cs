@@ -1,5 +1,6 @@
-﻿using Clean.Architecture.ServiceDefaults;
-using Clean.Architecture.Web.Configurations;
+﻿using ServiceDefaults;
+
+using Web.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,7 @@ builder.AddServiceDefaults()    // This sets up OpenTelemetry logging
        .AddLoggerConfigs();     // This adds Serilog for console formatting
 
 using var loggerFactory = LoggerFactory.Create(config => config.AddConsole());
-var startupLogger = loggerFactory.CreateLogger<Program>();
+var startupLogger = loggerFactory.CreateLogger<Web.Program>();
 
 startupLogger.LogInformation("Starting web host");
 
@@ -29,4 +30,7 @@ app.MapDefaultEndpoints(); // Aspire health checks and metrics
 app.Run();
 
 // Make the implicit Program.cs class public, so integration tests can reference the correct assembly for host building
-public partial class Program { }
+namespace Web
+{
+  public partial class Program { }
+}

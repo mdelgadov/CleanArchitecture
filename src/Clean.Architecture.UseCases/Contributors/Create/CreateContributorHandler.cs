@@ -1,6 +1,6 @@
-﻿using Clean.Architecture.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
 
-namespace Clean.Architecture.UseCases.Contributors.Create;
+namespace UseCases.Contributors.Create;
 
 public class CreateContributorHandler(IRepository<Contributor> _repository)
   : ICommandHandler<CreateContributorCommand, Fin<ContributorId>>

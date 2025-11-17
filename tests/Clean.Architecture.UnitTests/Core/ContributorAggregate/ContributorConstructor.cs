@@ -1,4 +1,8 @@
-﻿namespace Clean.Architecture.UnitTests.Core.ContributorAggregate;
+﻿using Core.ContributorAggregate;
+
+using ContributorName = Core.ContributorAggregate.ContributorName;
+
+namespace UnitTests.Core.ContributorAggregate;
 
 public class ContributorConstructor
 {

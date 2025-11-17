@@ -1,8 +1,10 @@
 ﻿using Ardalis.ListStartupServices;
-using Clean.Architecture.Infrastructure.Data;
+
+using Infrastructure.Data;
+
 using Scalar.AspNetCore;
 
-namespace Clean.Architecture.Web.Configurations;
+namespace Web.Configurations;
 
 public static class MiddlewareConfig
 {
@@ -14,7 +16,7 @@ public static class MiddlewareConfig
       app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
     }
     else
-    {   
+    {
       app.UseDefaultExceptionHandler(); // from FastEndpoints
       app.UseHsts();
     }
@@ -33,9 +35,9 @@ public static class MiddlewareConfig
     app.UseHttpsRedirection(); // Note this will drop Authorization headers
 
     // Run migrations and seed in Development or when explicitly requested via environment variable
-    var shouldMigrate = app.Environment.IsDevelopment() || 
+    var shouldMigrate = app.Environment.IsDevelopment() ||
                         app.Configuration.GetValue<bool>("Database:ApplyMigrationsOnStartup");
-    
+
     if (shouldMigrate)
     {
       await MigrateDatabaseAsync(app);
