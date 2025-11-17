@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/RicoSuter/NSwag/master/src/NSwag.Commands/commands.nswag",
+  "runtime": "Net60",
+  "defaultVariables": {
+    "ApiBaseUrl": "https://localhost:5001"
+  },
+  "documentGenerator": {
+    "fromDocument": {
+      "url": "$(ApiBaseUrl)/openapi/v1.json",
+      "output": null
+    }
+  },
+  "codeGenerators": {
+    "openApiToCSharpClient": {
+      "className": "ApiClient",
+      "namespace": "Clean.Architecture.Sdk.Client",
+      "generateClientInterfaces": true,
+      "injectHttpClient": true,
+      "useHttpClientCreationMethod": false,
+      "httpClientType": "System.Net.Http.HttpClient",
+      "useBaseUrl": true,
+      "generateDtoTypes": true,
+      "generateOptionalParameters": true,
+      "useCancellationToken": true,
+      "disposeHttpClient": false,
+      "protectedMethods": [],
+      "generateExceptionClasses": true,
+      "exceptionClass": "ApiException",
+      "wrapDtoExceptions": true,
+      "clientClassAccessModifier": "public",
+      "typeAccessModifier": "public",
+      "generateContractsOutput": false,
+      "contractsNamespace": "Clean.Architecture.Sdk.Contracts",
+      "parameterDateTimeFormat": "s",
+      "parameterDateTimeTimeZoneHandling": "Utc",
+      "serializeTypeInformation": false,
+      "dateType": "System.DateOnly",
+      "timeType": "System.TimeOnly",
+      "dateTimeType": "System.DateTime",
+      "dateTimeTimeZoneHandling": "Utc",
+      "arrayType": "System.Collections.Generic.ICollection",
+      "dictionaryType": "System.Collections.Generic.IDictionary",
+      "output": "Generated/ApiClient.cs"
+    }
+  }
+}

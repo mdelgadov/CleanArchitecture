@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Clean.Architecture.Sdk</AssemblyName>
+    <RootNamespace>Clean.Architecture.Sdk</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Default base URL for local dev; can be overridden with -p:ApiBaseUrl=... -->
+    <ApiBaseUrl Condition=" '$(ApiBaseUrl)' == '' ">https://localhost:5001</ApiBaseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" />
+    <PackageReference Include="NSwag.MSBuild" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- Optional: run NSwag on build when RunNSwag=true (e.g. dotnet build -p:RunNSwag=true -p:ApiBaseUrl=https://localhost:5001) -->
+  <Target Name="NSwagGenerateClient" AfterTargets="Build" Condition=" '$(RunNSwag)' == 'true' ">
+    <Message Text="Running NSwag code generation using $(MSBuildThisFileDirectory)nswag.json (ApiBaseUrl=$(ApiBaseUrl))" Importance="High" />
+    <Exec Command="&quot;$(NSwagExe_Net60)&quot; run $(MSBuildThisFileDirectory)nswag.json /variables:ApiBaseUrl=$(ApiBaseUrl)" />
+  </Target>
+
+  <!-- Convenience: explicit target so you can run -t:GenerateSdkClient -->
+  <Target Name="GenerateSdkClient">
+    <Message Text="Generating SDK client from $(ApiBaseUrl)/openapi/v1.json" Importance="High" />
+    <Exec Command="&quot;$(NSwagExe_Net60)&quot; run $(MSBuildThisFileDirectory)nswag.json /variables:ApiBaseUrl=$(ApiBaseUrl)" />
+  </Target>
+</Project>

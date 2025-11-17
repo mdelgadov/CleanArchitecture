@@ -26,6 +26,7 @@
   <Folder Name="/src/">
     <Project Path="src/Clean.Architecture.Core/Clean.Architecture.Core.csproj" />
     <Project Path="src/Clean.Architecture.Infrastructure/Clean.Architecture.Infrastructure.csproj" />
+    <Project Path="src/Clean.Architecture.Sdk/Clean.Architecture.Sdk.csproj" />
     <Project Path="src/Clean.Architecture.UseCases/Clean.Architecture.UseCases.csproj" />
     <Project Path="src/Clean.Architecture.Web/Clean.Architecture.Web.csproj" />
   </Folder>

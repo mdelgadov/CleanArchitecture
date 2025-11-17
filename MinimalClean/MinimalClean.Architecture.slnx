@@ -17,4 +17,5 @@
     <Project Path="src/MinimalClean.Architecture.AspireHost/MinimalClean.Architecture.AspireHost.csproj" />
     <Project Path="src/MinimalClean.Architecture.ServiceDefaults/MinimalClean.Architecture.ServiceDefaults.csproj" />
   </Folder>
+  <Project Path="../src/Clean.Architecture.Sdk/Clean.Architecture.Sdk.csproj" />
 </Solution>

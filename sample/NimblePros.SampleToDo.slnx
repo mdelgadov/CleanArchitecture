@@ -27,4 +27,5 @@
     </Project>
     <Project Path="tests/NimblePros.SampleToDo.UnitTests/NimblePros.SampleToDo.UnitTests.csproj" />
   </Folder>
+  <Project Path="../src/Clean.Architecture.Sdk/Clean.Architecture.Sdk.csproj" />
 </Solution>
