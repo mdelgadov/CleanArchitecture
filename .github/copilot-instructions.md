@@ -1,8 +1,7 @@
-# GitHub Copilot Instructions for Clean Architecture Template
+# GitHub Copilot Instructions for <Your Project Name>
 
 ## Project Overview
-This is a **Clean Architecture template** for .NET 9 that demonstrates Domain-Driven Design (DDD) patterns. It's a starter template, not a reference application - delete sample code once you understand the patterns.
-
+This is a **Clean Architecture template** for .NET 10 that implements Specification Driven Design (DDD) patterns. It uses FastEndpoints for API development, MediatR for CQRS, and EF Core for data access. The architecture is layered to ensure separation of concerns and maintainability.
 ## Architecture & Project Structure
 
 ### C# Conventions
@@ -27,6 +26,15 @@ This is a **Clean Architecture template** for .NET 9 that demonstrates Domain-Dr
 - **Web**: FastEndpoints API, REPR pattern, validation
 
 ## Development Patterns
+
+## Specifications
+- Specifications are expressed in Yaml prompts. 
+- They have a schema defined in prompt-spec.schema.yaml.
+- They are stored in the `YamlPrompts` folder.
+- They defined the behavior for the solution. A behavior usually defines a measureable and discrete piece of functionality.
+- Each behavior is implemented in code as a set of classes and methods that fulfill the requirements and its associated tests. It's evaluated by the Acceptance Criteria.
+- Specifications can be composed of other specifications to build complex behaviors from simpler ones. This composability is a key feature of the specification pattern.
+- For aspects of the specification that contains complicated logic, we use BDD style Gherkin files to define the scenarios and expected outcomes. This comes with the benefit of thorough tests and documentation.
 
 ### API Endpoints (FastEndpoints + REPR)
 - One endpoint per file: `Create.cs`, `Update.cs`, `Delete.cs`, `GetById.cs`
@@ -114,10 +122,21 @@ Contributors/
 ## Common Gotchas
 
 - Don't include hyphens in project names (template limitation)
-- Replace `Ardalis.SharedKernel` with your own shared kernel
-- Database path in `appsettings.json` for SQLite
+- Attach the ZoEazy.Shared solution for shared classes, utilities, etc.
+- Database path in `appsettings.json` forSQL server.
 - Use absolute paths in EF migration commands
 - FastEndpoints uses different validation approach than Controller-based APIs
 
-## VS Code Tasks
-Use the predefined tasks: `build`, `publish`, `watch` instead of manual `dotnet` commands when possible.
+## Specifications
+Refer to these documents for detailed specifications on other aspects of the project:
+- [Constitution](constitution.md)
+- [Architecture](architecture.md)
+- [Best Practices](best-practices.md)
+- [Naming Conventions](naming-conventions.md)
+- [Performance Considerations](performance.md)
+- [TDD (Reasonable TDD)](reasonable-tdd.md)
+- [Repository Rules](repository-rules.md) 
+- [Security Considerations](security.md)
+- [Testing](testing.md)
+
+- [Snippets (not standardized and not curated, be careful)]

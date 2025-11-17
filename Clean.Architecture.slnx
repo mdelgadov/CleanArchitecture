@@ -6,22 +6,12 @@
   </Configurations>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
-    <File Path=".template.config/template.json" />
-    <File Path="architecture.md" />
-    <File Path="best-practices.md" />
     <File Path="CleanArchitecture.nuspec" />
-    <File Path="constitution.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
     <File Path="docs/architecture-decisions/README.md" />
     <File Path="integrate-languagext.yaml" />
-    <File Path="naming-conventions.md" />
-    <File Path="performance.md" />
     <File Path="prompt-spec.schema.yaml" />
-    <File Path="reasonable-tdd.md" />
-    <File Path="rules.md" />
-    <File Path="security.md" />
-    <File Path="testing.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Clean.Architecture.Core/Clean.Architecture.Core.csproj" />
