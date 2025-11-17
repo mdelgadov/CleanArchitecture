@@ -7,8 +7,7 @@
     <PackageReference Include="Azure.Identity" />
     <PackageReference Include="MailKit" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design"
-                      ExcludeAssets="contentFiles" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" ExcludeAssets="contentFiles" PrivateAssets="all" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />

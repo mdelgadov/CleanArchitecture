@@ -1,4 +1,5 @@
-﻿using Clean.Architecture.Web.Configurations;
+﻿using Clean.Architecture.ServiceDefaults;
+using Clean.Architecture.Web.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 

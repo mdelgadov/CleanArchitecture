@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "ardalis (Steve Smith)",
+  "author": "Miguel Delgado",
   "classifications": [
     "Web",
     "ASP.NET",
@@ -10,7 +10,7 @@
     "language": "C#",
     "type": "project"
   },
-  "identity": "Ardalis.CleanArchitecture.Template",
+  "identity": "MDelgadov.CleanArchitecture.Template",
   "name": "ASP.NET Clean Architecture Solution",
   "shortName": "clean-arch",
   "sourceName": "Clean.Architecture",
@@ -21,15 +21,14 @@
       "include": [
         "**/*"
       ],
-      "exclude": [ 
+      "exclude": [
         ".vs/**",
         ".vscode/**",
         ".git/**",
         ".github/**",
         ".idea/**",
         ".template.config/**",
-        "docs/**",
-        "sample/**"
+        "docs/**"
       ],
       "modifiers": [
         {
